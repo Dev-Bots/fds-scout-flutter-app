@@ -1,4 +1,4 @@
-package com.example.fds_scout_flutter_app
+package com.example.dev_scout_fds
 
 import io.flutter.embedding.android.FlutterActivity
 

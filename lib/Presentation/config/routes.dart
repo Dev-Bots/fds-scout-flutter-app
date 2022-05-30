@@ -1,6 +1,8 @@
 import 'package:dev_scout_fds/Presentation/screens/screens.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/games/field_pitch.dart';
+
 class RouteGenerator {
   static const String loginPage = "/login";
   static const String homePage = "/home"; //default page
@@ -10,8 +12,10 @@ class RouteGenerator {
   static const String profilePage = "/profile";
   static const String errorRoute = "/event";
   static const String splashPage = "/";
+  static const String pitchPage = "/field";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    final args = settings.arguments;
     switch (settings.name) {
       case loginPage:
         return MaterialPageRoute(builder: (_) => LoginPage());
@@ -22,11 +26,16 @@ class RouteGenerator {
 
       case splashPage:
         return MaterialPageRoute(builder: (_) => SplashPage());
-      case gamesPage:
+      case pitchPage:
+        TeamsArgument argument = args as TeamsArgument;
+
         return MaterialPageRoute(
-            builder: (_) => GamesList(
-                  eventId: settings.arguments as int,
+            builder: (_) => Field(
+                  team1: argument.team1,
+                  team2: argument.team2,
                 ));
+      case gamesPage:
+        return MaterialPageRoute(builder: (_) => GamesList());
       default:
         throw const FormatException("Route was not found");
     }

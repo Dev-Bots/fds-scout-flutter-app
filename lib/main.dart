@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:fds_scout_flutter_app/Bloc/AccountBloc/account_bloc.dart';
-import 'package:fds_scout_flutter_app/Data/provider/account/AccountProvider.dart';
-import 'package:fds_scout_flutter_app/Presentation/config/routes.dart';
+import 'package:dev_scout_fds/Bloc/AccountBloc/account_bloc.dart';
+import 'package:dev_scout_fds/Data/provider/account/AccountProvider.dart';
+import 'package:dev_scout_fds/Presentation/config/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_localizations/flutter_localizations.dart';
 // import 'package:logs/logs.dart';
-import 'package:fds_scout_flutter_app/Data/repository/repository.dart';
+import 'package:dev_scout_fds/Data/repository/repository.dart';
 import 'bloc_observer.dart';
 
 WidgetsBinding ensureInitialized() {
