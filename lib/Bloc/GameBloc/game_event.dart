@@ -8,6 +8,8 @@ abstract class GameEvent extends Equatable {
 }
 
 class GetAllGames extends GameEvent {
+  int eventId;
+  GetAllGames(this.eventId);
   @override
-  List<Object> get props => [];
+  List<Object> get props => [eventId];
 }

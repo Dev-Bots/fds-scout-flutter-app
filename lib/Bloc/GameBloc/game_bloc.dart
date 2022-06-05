@@ -10,7 +10,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
 
   GameBloc() : super(GamesLoading()) {
     on<GetAllGames>((event, emit) async {
-      var games = await _gameRepository.getAllGames();
+      var games = await _gameRepository.getAllGames(event.eventId);
 
       if (games != null) {
         emit(GamesLoaded(games: games));
