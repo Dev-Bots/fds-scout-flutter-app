@@ -19,6 +19,14 @@ class GradeUploaded extends GradeState {
   List<Object> get props => [grade];
 }
 
+class GradeLoaded extends GradeState {
+  final grade;
+
+  const GradeLoaded({required this.grade});
+  @override
+  List<Object> get props => [grade];
+}
+
 class GradeFailed extends GradeState {
   final String error;
 

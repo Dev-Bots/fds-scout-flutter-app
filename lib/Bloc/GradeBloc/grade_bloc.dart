@@ -10,9 +10,21 @@ class GradeBloc extends Bloc<GradeEvent, GradeState> {
   GradeBloc() : super(GradeInitial()) {
     on<GradePlayer>((event, emit) async {
       emit(GradeLoading());
-      var grade = await _gradeRepository.gradePlayer(event.grade);
+      var grade =
+          await _gradeRepository.gradePlayer(event.grade, event.gradeId);
       if (grade != null) {
         emit(GradeUploaded(grade: grade));
+      } else {
+        emit(const GradeFailed(error: "Failed to load."));
+      }
+    });
+
+    on<GetGrade>((event, emit) async {
+      emit(GradeLoading());
+      var grade = await _gradeRepository.getGrade(
+          event.playerId, event.scoutId, event.eventId);
+      if (grade != null) {
+        emit(GradeLoaded(grade: grade));
       } else {
         emit(const GradeFailed(error: "Failed to load."));
       }
