@@ -12,28 +12,28 @@ class EventList extends StatelessWidget {
       if (state is EventsLoaded) {
         return Column(
           children: [
-            Container(
-              height: 50,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  // onChanged: (value) => _runFilter(value),
-                  cursorColor: Colors.grey,
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                    filled: true,
-                    fillColor: Colors.grey.shade200,
-                    prefixIcon: Icon(Icons.search, color: Colors.grey),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50),
-                        borderSide: BorderSide.none),
-                    hintText: "Search for Events",
-                    hintStyle: TextStyle(fontSize: 14),
-                  ),
-                ),
-              ),
-            ),
+            // Container(
+            //   height: 50,
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: TextField(
+            //       // onChanged: (value) => _runFilter(value),
+            //       cursorColor: Colors.grey,
+            //       decoration: InputDecoration(
+            //         contentPadding:
+            //             EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+            //         filled: true,
+            //         fillColor: Colors.grey.shade200,
+            //         prefixIcon: Icon(Icons.search, color: Colors.grey),
+            //         border: OutlineInputBorder(
+            //             borderRadius: BorderRadius.circular(50),
+            //             borderSide: BorderSide.none),
+            //         hintText: "Search for Events",
+            //         hintStyle: TextStyle(fontSize: 14),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Expanded(
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
@@ -96,7 +96,8 @@ class EventList extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, "/games");
+                                Navigator.pushNamed(context, "/games",
+                                    arguments: state.events[index].eventId);
                               },
                               child: AnimatedContainer(
                                   height: 35,

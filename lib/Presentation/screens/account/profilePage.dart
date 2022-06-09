@@ -147,12 +147,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                         labelText: 'Pick your profile picture'),
                                     maxImages: 1,
                                     initialValue: [
-                                      state.user.profilePicture,
-                                      // ApiImage(
-                                      //   id: 'whatever',
-                                      //   imageUrl:
-                                      //       'https://images.pexels.com/photos/8311418/pexels-photo-8311418.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
-                                      // ),
+                                      ApiImage(
+                                        id: 'whatever',
+                                        imageUrl:
+                                            'https://images.pexels.com/photos/8311418/pexels-photo-8311418.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -344,20 +343,31 @@ class _ProfilePageState extends State<ProfilePage> {
                                   final token = await authDataProvider
                                       .getLocalAccessToken();
 
+                                  final prefs =
+                                      await SharedPreferences.getInstance();
+
+                                  final user = prefs.getString('user');
+                                  final accountID = jsonDecode(user!)['id'];
+
                                   var request = http.MultipartRequest(
                                       'Patch',
                                       Uri.parse(
-                                          'http://$baseURL/api/scouts/145/'));
+                                          'http://$baseURL/api/scouts/$accountID/'));
                                   request.headers.addAll(
                                       {"Authorization": "Bearer $token"});
-                                  request.files.add(
-                                      await http.MultipartFile.fromPath(
-                                          'profile_picture',
-                                          _formKey
-                                              .currentState!
-                                              .fields['profile_image']!
-                                              .value[0]
-                                              .path));
+
+                                  if (_formKey.currentState!
+                                      .fields['profile_image']!.value[0]) {
+                                    request.files.add(
+                                        await http.MultipartFile.fromPath(
+                                            'profile_picture',
+                                            _formKey
+                                                .currentState!
+                                                .fields['profile_image']!
+                                                .value[0]
+                                                .path));
+                                  }
+
                                   request.fields['username'] = _formKey
                                       .currentState!.fields['username']!.value;
                                   request.fields['phone_number'] = _formKey
@@ -368,6 +378,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                       .currentState!.fields['username']!.value;
                                   request.fields['address'] = _formKey
                                       .currentState!.fields['address']!.value;
+                                  print(request.files);
+                                  print(request.fields);
                                   var response = await request.send();
                                 },
                                 child: const Text("Update Account"),

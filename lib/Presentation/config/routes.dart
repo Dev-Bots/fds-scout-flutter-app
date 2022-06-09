@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dev_scout_fds/Presentation/screens/screens.dart';
 import 'package:flutter/material.dart';
 
@@ -31,11 +33,12 @@ class RouteGenerator {
 
         return MaterialPageRoute(
             builder: (_) => Field(
-                  team1: argument.team1,
-                  team2: argument.team2,
-                ));
+                team1: argument.team1,
+                team2: argument.team2,
+                paramterId: argument.paramterId));
       case gamesPage:
-        return MaterialPageRoute(builder: (_) => GamesList());
+        int arg = args as int;
+        return MaterialPageRoute(builder: (_) => GamesList(arg));
       default:
         throw const FormatException("Route was not found");
     }

@@ -23,8 +23,8 @@ class CustomDrawer extends StatelessWidget {
                   child: Column(
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb'),
+                        // backgroundImage: NetworkImage(
+                        //     'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb'),
                         radius: 50,
                       ),
                       SizedBox(height: 25),

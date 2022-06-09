@@ -9,17 +9,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class TeamsArgument {
   final int team1;
   final int team2;
+  final int paramterId;
 
-  TeamsArgument(this.team1, this.team2);
+  TeamsArgument(this.team1, this.team2, this.paramterId);
 }
 
 class GamesList extends StatelessWidget {
-  GamesList({Key? key}) : super(key: key);
+  final int eventId;
+  const GamesList(this.eventId, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GameBloc()..add(GetAllGames()),
+      create: (context) => GameBloc()..add(GetAllGames(eventId)),
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -62,7 +64,8 @@ class GamesList extends StatelessWidget {
                                       context, "/field",
                                       arguments: TeamsArgument(
                                           state.games[index].team1,
-                                          state.games[index].team2)),
+                                          state.games[index].team2,
+                                          eventId)),
                                   child: Container(
                                     margin: EdgeInsets.only(
                                         left: 5, top: 10, right: 5, bottom: 10),
@@ -79,26 +82,34 @@ class GamesList extends StatelessWidget {
                                         offset: Offset(0, 3),
                                       )
                                     ]),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                    child: Column(
                                       children: [
-                                        Text(
-                                          ' Team ${state.games[index].team1}',
-                                          style: TextStyle(
-                                              color: Colors.blue,
-                                              fontSize: 30,
-                                              fontWeight: FontWeight.bold),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              ' Team ${index + 1}',
+                                              style: TextStyle(
+                                                  color: Colors.blue,
+                                                  fontSize: 30,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text('vs.'),
+                                            ),
+                                            Text(
+                                                'Team ${state.games.length * 2 - index}',
+                                                style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 30,
+                                                    fontWeight:
+                                                        FontWeight.bold))
+                                          ],
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text('vs.'),
-                                        ),
-                                        Text('Team ${state.games[index].team2}',
-                                            style: TextStyle(
-                                                color: Colors.red,
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.bold))
+                                        Text(state.games[index].time)
                                       ],
                                     ),
                                   ),
