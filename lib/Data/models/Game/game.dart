@@ -4,17 +4,19 @@ import 'package:flutter/material.dart';
 
 @immutable
 class Game extends Equatable {
-  const Game({
+  Game({
     required this.gameId,
     required this.eventId,
     required this.team1,
     required this.team2,
+    this.time,
   });
 
   final int? gameId;
   final int? eventId;
   final int? team1;
   final int? team2;
+  var time;
 
   @override
   List<Object?> get props => [gameId, eventId, team1, team2];
@@ -24,6 +26,7 @@ class Game extends Equatable {
         eventId: json['event'],
         team1: json['team1'],
         team2: json['team2'],
+        time: json['time'],
 
         // club: json['club'],
       );

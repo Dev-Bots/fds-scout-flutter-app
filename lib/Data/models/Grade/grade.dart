@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 
 class Grade extends Equatable {
   Grade(
-      {this.score,
+      {required this.id,
+      this.score,
       this.aggregate, //needs to be removed
       required this.eventId,
       required this.player,
       required this.scoutId});
 
+  int id;
   var score;
   var aggregate;
   final int eventId;
@@ -17,9 +19,10 @@ class Grade extends Equatable {
   final int scoutId;
 
   @override
-  List<Object?> get props => [score, eventId, player, scoutId];
+  List<Object?> get props => [id, score, eventId, player, scoutId];
 
   factory Grade.fromJson(Map<String, dynamic> json) => Grade(
+        id: json['id'],
         score: json['score'],
         eventId: json['event'],
         scoutId: json['scout'],

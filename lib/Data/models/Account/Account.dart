@@ -77,6 +77,7 @@ class Account extends Equatable {
   Map<String, dynamic> toJson() {
     // final Map<String, dynamic> data = Map<String, dynamic>();
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = accountID;
     data['username'] = userName;
     data['password'] = password;
     data['profile_picture'] = profilePicture;
