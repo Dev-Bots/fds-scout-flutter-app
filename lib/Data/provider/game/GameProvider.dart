@@ -21,10 +21,10 @@ class GameDataProvider {
     Interceptors(),
   ], retryPolicy: ExpiredTokenRetryPolicy());
 
-  Future getAllGames() async {
+  Future getAllGames(int eventId) async {
     try {
       final response =
-          await httpClient.get(Uri.http(_baseUrl, '/api/view_match/'));
+          await httpClient.get(Uri.http(_baseUrl, '/api/view_match/$eventId'));
 
       if (response.statusCode == 200) {
         final games = jsonDecode(response.body);
