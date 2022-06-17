@@ -5,8 +5,8 @@ class GameRepository {
 
   GameRepository();
 
-  Future getAllGames() async {
+  Future getAllGames(int eventId) async {
     print('reached event repository');
-    return await gameDataProvider.getAllGames();
+    return await gameDataProvider.getAllGames(eventId);
   }
 }
